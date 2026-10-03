@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Result Management System</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"
+        integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+</head>
+
+<body>
+    <div class="app">
+
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="icon">🎓</div>
+                <div>
+                    <h2>SRMS</h2>
+                    <p>Student Result<br>Management System</p>
+                </div>
+            </div>
+
+            <nav class="nav">
+                <button class="nav-item active" data-section="Dashboard"> <i class="fa-solid fa-house"></i>
+                    <span>Dashboard</span></button>
+                <button class="nav-item" data-section="Students">
+                    <i class="fa-solid fa-users"></i> <span>Students</span></button>
+                <button class="nav-item" data-section="Results"> <i class="fa-solid fa-file-lines"></i>
+                    <span>Results</span></button>
+                <button class="nav-item" data-section="Reports"> <i class="fa-solid fa-chart-simple"></i>
+                    <span>Reports</span></button>
+                <button class="nav-item" data-section="Settings"> <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span></button>
+            </nav>
+        </aside>
+
+        <main class="main">
+            <header class="topbar">
+                <button class="menu-btn" id="menuBtn">☰</button>
+
+                <div class="search-box">
+                    <span><i class="fa-solid fa-magnifying-glass"></i></span>
+                    <input id="globalSearch" type="text" placeholder="Search students, results...">
+                </div>
+
+                <div class="profile">
+                    <div class="notification"> <i class="fa-regular fa-bell"></i> <i></i></div>
+                    <div class="avatar">👨🏻‍💼</div>
+                    <div class="profile-text">
+                        <strong>Admin User</strong>
+                        <small>Administrator</small>
+                    </div>
+                    <span>⌄</span>
+                </div>
+            </header>
+
+            <section class="content">
+
+                <div class="hero">
+                    <div>
+                        <h1>Student Result Management System</h1>
+                        <p>Manage student marks, grades, and performance easily.</p>
+                    </div>
+                    <div class="hero-art">
+                        <div class="book-stack">📚</div>
+                        <div class="cap">🎓</div>
+                        <div class="paper">📄<b>A+</b></div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <section class="left-column">
+
+                        <div class="stats">
+                            <div class="stat-card blue">
+                                <div class="stat-icon"> <i class="fa-solid fa-users"></i> </div>
+                                <div><span>Total Students</span><strong id="totalStudents">10</strong><small>Registered
+                                        students</small></div>
+                                <em>↑ 12%</em>
+                            </div>
+
+                            <div class="stat-card green">
+                                <div class="stat-icon">✓</div>
+                                <div><span>Passed</span><strong id="passedStudents">6</strong><small>81.7% pass
+                                        rate</small></div>
+                                <em>↑ 8%</em>
+                            </div>
+
+                            <div class="stat-card red">
+                                <div class="stat-icon">×</div>
+                                <div><span>Failed</span><strong id="failedStudents">4</strong><small>18.3%
+                                        failed</small></div>
+                                <em>↓ 4%</em>
+                            </div>
+
+                            <div class="stat-card yellow">
+                                <div class="stat-icon">▥</div>
+                                <div><span>Average Percentage</span><strong>72.6%</strong><small>Overall average</small>
+                                </div>
+                                <em>↑ 5%</em>
+                            </div>
+                        </div>
+
+                        <div class="panel results-panel">
+                            <div class="panel-heading">
+                                <div>
+                                    <h2>Student Results</h2>
+                                </div>
+                                <div class="actions">
+                                    <input id="studentSearch" type="text" placeholder="⌕  Search student...">
+                                    <select id="courseFilter">
+                                        <option value="All">All Courses</option>
+                                        <option value="B.Sc">B.Sc</option>
+                                        <option value="B.Com">B.Com</option>
+                                        <option value="BCA">BCA</option>
+                                    </select>
+                                    <select id="sortFilter">
+                                        <option value="default">⇅ Sort by Percentage</option>
+                                        <option value="high">Highest</option>
+                                        <option value="low">Lowest</option>
+                                    </select>
+                                    <button class="add-btn" id="addBtn">＋ Add Result</button>
+                                </div>
+                            </div>
+
+                            <div class="table-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Roll No</th>
+                                            <th>Student Name</th>
+                                            <th>Course</th>
+                                            <th>Math</th>
+                                            <th>Science</th>
+                                            <th>English</th>
+                                            <th>Total</th>
+                                            <th>Percentage</th>
+                                            <th>Grade</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="resultBody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+
+                    <aside class="right-column">
+                        <div class="panel form-panel">
+                            <div class="panel-title"> <i class="fa-solid fa-pen"></i> <span>Add / Edit Result</span>
+                            </div>
+
+                            <form id="resultForm">
+                                <div class="form-row">
+                                    <label>Student Name<input id="name" required
+                                            placeholder="Enter student name"></label>
+                                    <label>Roll No<input id="roll" required placeholder="Enter roll number"></label>
+                                </div>
+
+                                <label>Course
+                                    <select id="course" required>
+                                        <option value="">Select course</option>
+                                        <option>B.Sc</option>
+                                        <option>B.Com</option>
+                                        <option>BCA</option>
+                                    </select>
+                                </label>
+
+                                <div class="marks">
+                                    <label>Math<input id="math" type="number" min="0" max="100" required
+                                            placeholder="0 - 100"></label>
+                                    <label>Science<input id="science" type="number" min="0" max="100" required
+                                            placeholder="0 - 100"></label>
+                                    <label>English<input id="english" type="number" min="0" max="100" required
+                                            placeholder="0 - 100"></label>
+                                </div>
+
+                                <button class="save-btn" type="submit">▣ &nbsp; Save Result</button>
+                            </form>
+                        </div>
+
+                        <div class="panel chart-panel">
+                            <div class="panel-title">▥ <span>Performance Overview</span></div>
+                            <div class="chart" id="chart">
+                                <div class="y-labels">
+                                    <span>100</span><span>80</span><span>60</span><span>40</span><span>20</span><span>0</span>
+                                </div>
+                                <div class="bars">
+                                    <div class="bar-group">
+                                        <div class="bar" style="height:73%"></div><small>Math</small>
+                                    </div>
+                                    <div class="bar-group">
+                                        <div class="bar" style="height:71%"></div><small>Science</small>
+                                    </div>
+                                    <div class="bar-group">
+                                        <div class="bar" style="height:69%"></div><small>English</small>
+                                    </div>
+                                    <div class="bar-group">
+                                        <div class="bar average" style="height:73%"></div><small>Average</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div class="modal hidden" id="modal">
+        <div class="modal-box">
+            <button class="close" id="closeModal">×</button>
+            <h2>Add New Result</h2>
+            <p>Use the form on the right to add a new student result.</p>
+            <button class="ok-btn" id="okModal">OK</button>
+        </div>
+    </div>
+
+    <script src="JS/script.js"></script>
+</body>
+
+</html>
